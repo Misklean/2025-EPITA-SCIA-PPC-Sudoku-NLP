@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Sudoku.Shared\Sudoku.Shared.csproj" />
+    <PackageReference Include="Microsoft.Z3" Version="4.8.11" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Z3" Version="4.8.11" />
+    <ProjectReference Include="..\Sudoku.Shared\Sudoku.Shared.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

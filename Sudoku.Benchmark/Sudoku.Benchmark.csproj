@@ -28,6 +28,7 @@
     <ProjectReference Include="..\Sudoku.Human\Sudoku.Human.csproj" />
     <ProjectReference Include="..\Sudoku.GeneticAlg\Sudoku.GeneticAlg.csproj" />
     <ProjectReference Include="..\Sudoku.Proba\Sudoku.Proba.csproj" />
+    <ProjectReference Include="..\Sudoku.Z3copy\Sudoku.Z3copy.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="appsettings.json">
