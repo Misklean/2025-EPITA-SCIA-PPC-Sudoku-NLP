@@ -29,6 +29,10 @@
     <ProjectReference Include="..\Sudoku.GeneticAlg\Sudoku.GeneticAlg.csproj" />
     <ProjectReference Include="..\Sudoku.Proba\Sudoku.Proba.csproj" />
     <ProjectReference Include="..\Sudoku.Z3copy\Sudoku.Z3copy.csproj" />
+    <ProjectReference Include="..\Sudoku_Z3.Original\Sudoku_Z3.Original.csproj" />
+    <ProjectReference Include="..\Sudoku_Z3.BitVector\Sudoku_Z3.BitVector.csproj" />
+    <ProjectReference Include="..\Sudoku_Z3.BitVectorAndMask\Sudoku_Z3.BitVectorAndMask.csproj" />
+    <ProjectReference Include="..\Sudoku_Z3.BitVectorAndMaskAndTactic\Sudoku_Z3.BitVectorAndMaskAndTactic.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="appsettings.json">

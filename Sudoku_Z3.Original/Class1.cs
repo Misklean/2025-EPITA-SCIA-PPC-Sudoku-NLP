@@ -1,42 +1,41 @@
-﻿using System.Collections.Generic;
-using Microsoft.Z3;
+﻿
 using Sudoku.Shared;
+using Microsoft.Z3;
 
-namespace Sudoku.Z3copy
+namespace Sudoku_Z3.Original
 {
-    public class Z3copy : ISudokuSolver
+    public class Z3V1_Original : ISudokuSolver
     {
-        private BitVecExpr[][] CreateEvalMatrix(Context ctx)
+        private IntExpr[][] CreateEvalMatrix(Context ctx)
         {
-            BitVecExpr[][] X = new BitVecExpr[9][];
+            IntExpr[][] X = new IntExpr[9][];
 
             for (uint i = 0; i < 9; i++)
             {
-                X[i] = new BitVecExpr[9];
+                X[i] = new IntExpr[9];
                 for (uint j = 0; j < 9; j++)
-                    X[i][j] = ctx.MkBVConst(ctx.MkSymbol("x_" + (i + 1) + "_" + (j + 1)), 4);
+                    X[i][j] = (IntExpr)ctx.MkConst(ctx.MkSymbol("x_" + (i + 1) + "_" + (j + 1)), ctx.IntSort);
             }
 
             return X;
         }
 
-        private Expr[][] EvalCell(Context ctx, BitVecExpr[][] X)
+        private Expr[][] EvalCell(Context ctx, IntExpr[][] X)
         {
             Expr[][] cells_c = new Expr[9][];
-            BitVecNum one = ctx.MkBV(1, 4);
-            BitVecNum nine = ctx.MkBV(9, 4);
 
             for (uint i = 0; i < 9; i++)
             {
                 cells_c[i] = new BoolExpr[9];
                 for (uint j = 0; j < 9; j++)
-                    cells_c[i][j] = ctx.MkAnd(ctx.MkBVULE(one, X[i][j]), ctx.MkBVULE(X[i][j], nine));
+                    cells_c[i][j] = ctx.MkAnd(ctx.MkLe(ctx.MkInt(1), X[i][j]),
+                                              ctx.MkLe(X[i][j], ctx.MkInt(9)));
             }
 
             return cells_c;
         }
 
-        private BoolExpr[] EvalRow(Context ctx, BitVecExpr[][] X)
+        private BoolExpr[] EvalRow(Context ctx, IntExpr[][] X)
         {
             BoolExpr[] rows_c = new BoolExpr[9];
 
@@ -46,13 +45,13 @@ namespace Sudoku.Z3copy
             return rows_c;
         }
 
-        private BoolExpr[] EvalCol(Context ctx, BitVecExpr[][] X)
+        private BoolExpr[] EvalCol(Context ctx, IntExpr[][] X)
         {
             BoolExpr[] cols_c = new BoolExpr[9];
 
             for (uint j = 0; j < 9; j++)
             {
-                BitVecExpr[] column = new BitVecExpr[9];
+                IntExpr[] column = new IntExpr[9];
                 for (uint i = 0; i < 9; i++)
                     column[i] = X[i][j];
 
@@ -60,9 +59,12 @@ namespace Sudoku.Z3copy
             }
 
             return cols_c;
+            {
+                
+            }
         }
 
-        private BoolExpr[][] EvalSquare(Context ctx, BitVecExpr[][] X)
+        private BoolExpr[][] EvalSquare(Context ctx, IntExpr[][] X)
         {
             BoolExpr[][] sq_c = new BoolExpr[3][];
 
@@ -71,11 +73,10 @@ namespace Sudoku.Z3copy
                 sq_c[i0] = new BoolExpr[3];
                 for (uint j0 = 0; j0 < 3; j0++)
                 {
-                    BitVecExpr[] square = new BitVecExpr[9];
+                    IntExpr[] square = new IntExpr[9];
                     for (uint i = 0; i < 3; i++)
                         for (uint j = 0; j < 3; j++)
                             square[3 * i + j] = X[3 * i0 + i][3 * j0 + j];
-
                     sq_c[i0][j0] = ctx.MkDistinct(square);
                 }
             }
@@ -99,31 +100,32 @@ namespace Sudoku.Z3copy
             return sudoku_c;
         }
 
-        private BoolExpr CreateSudokuToSolve(Context ctx, int[,] instance, BitVecExpr[][] X)
+        private BoolExpr CreateSudokuToSolve(Context ctx, int[,] instance, IntExpr[][] X)
         {
             BoolExpr instance_c = ctx.MkTrue();
 
             for (uint i = 0; i < 9; i++)
                 for (uint j = 0; j < 9; j++)
-                    if (instance[i, j] != 0)
-                    {
-                        instance_c = ctx.MkAnd(instance_c,
-                            ctx.MkEq(X[i][j], ctx.MkBV(instance[i, j], 4)));
-                    }
+                    instance_c = ctx.MkAnd(instance_c,
+                        (BoolExpr)
+                        ctx.MkITE(ctx.MkEq(ctx.MkInt(instance[i, j]), ctx.MkInt(0)),
+                                    ctx.MkTrue(),
+                                    ctx.MkEq(X[i][j], ctx.MkInt(instance[i, j]))));
 
             return instance_c;
         }
 
-        private SudokuGrid SolveSudoku(Solver solver, BitVecExpr[][] X)
+        private SudokuGrid SolveSudoku(Solver solver, IntExpr[][] X)
         {
             var sudoku_g = new SudokuGrid();
             Model m = solver.Model;
+            Expr[,] R = new Expr[9, 9];
 
             for (uint i = 0; i < 9; i++)
                 for (uint j = 0; j < 9; j++)
                 {
-                    var eval = m.Evaluate(X[i][j]) as BitVecNum;
-                    sudoku_g.Cells[i, j] = (int)eval.UInt64;
+                    R[i, j] = m.Evaluate(X[i][j]);
+                    sudoku_g.Cells[i, j] = (int)((IntNum)R[i, j]).UInt64; 
                 }
 
             return sudoku_g;
@@ -133,10 +135,10 @@ namespace Sudoku.Z3copy
         {
             Context ctx = new Context(new Dictionary<string, string>() { { "model", "true" } });
 
-            // 9x9 matrix of 4-bit vector variables
-            BitVecExpr[][] X = CreateEvalMatrix(ctx);
+            // 9x9 matrix of integer variables
+            IntExpr[][] X = CreateEvalMatrix(ctx);
 
-            // each cell contains a value in {1, ..., 9} represented as a bit vector
+            // each cell contains a value in {1, ..., 9}
             Expr[][] cells_c = EvalCell(ctx, X);
 
             // each row contains a digit at most once
@@ -163,8 +165,9 @@ namespace Sudoku.Z3copy
             {
                 return s;
             }
-
+            
             return SolveSudoku(solver, X);
         }
+
     }
 }

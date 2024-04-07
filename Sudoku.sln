@@ -14,27 +14,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Puzzles", "Puzzles", "{5351
 		Puzzles\Sudoku_top95.txt = Puzzles\Sudoku_top95.txt
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sudoku.Backtracking", "Sudoku.Backtracking\Sudoku.Backtracking.csproj", "{1C50AE77-2CE9-4BD8-ADFE-3C3A255FFC78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku_Z3.Original", "Sudoku_Z3.Original\Sudoku_Z3.Original.csproj", "{75CE18BF-D594-42E4-A8C3-BD51FA2CD46B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sudoku.PSO", "Sudoku.PSO\Sudoku.PSO.csproj", "{ACFD48BC-E434-4F98-B539-47437308B18C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku_Z3.BitVector", "Sudoku_Z3.BitVector\Sudoku_Z3.BitVector.csproj", "{680D153B-8F9D-44F0-8CA9-C852D5D4BBE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku.Z3", "Sudoku.Z3\Sudoku.Z3.csproj", "{737F838C-D505-4363-A005-E017A25D5DC1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku_Z3.BitVectorAndMask", "Sudoku_Z3.BitVectorAndMask\Sudoku_Z3.BitVectorAndMask.csproj", "{08B0203C-0EDE-4277-8795-85CBB57BE5C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku.Norvig", "Sudoku.Norvig\Sudoku.Norvig.csproj", "{E7518E5A-F1FB-4C83-BAC2-BDAC016D73B1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku.GraphColoration", "Sudoku.GraphColoration\Sudoku.GraphColoration.csproj", "{ECD5379C-F836-4F74-8D9A-5ABA09EF6B62}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku.Human", "Sudoku.Human\Sudoku.Human.csproj", "{10CA84F8-9EDC-442F-A1B4-716CA12DD6C1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku.DancingLinks", "Sudoku.DancingLinks\Sudoku.DancingLinks.csproj", "{7DF96DD7-E812-4DF7-8149-89C3055808C3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku.DancingLinksAlgorithm", "Sudoku.DancingLinksAlgorithm\Sudoku.DancingLinksAlgorithm.csproj", "{DE02E4A8-ABF5-4249-9A5A-6C372DF9C56A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku.GeneticAlg", "Sudoku.GeneticAlg\Sudoku.GeneticAlg.csproj", "{ECE36C85-7FFF-4B1F-BF73-ADB280875E97}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku.Proba", "Sudoku.Proba\Sudoku.Proba.csproj", "{1A8C7D67-ABB9-4054-A94C-661C193FF7E7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku.Z3copy", "Sudoku.Z3copy\Sudoku.Z3copy.csproj", "{7F349296-7EB5-44DE-A49D-317566DB4F50}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku_Z3.BitVectorAndMaskAndTactic", "Sudoku_Z3.BitVectorAndMaskAndTactic\Sudoku_Z3.BitVectorAndMaskAndTactic.csproj", "{320198D3-67EB-425C-88D4-36D736F124DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,6 +80,22 @@ Global
 		{7F349296-7EB5-44DE-A49D-317566DB4F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F349296-7EB5-44DE-A49D-317566DB4F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F349296-7EB5-44DE-A49D-317566DB4F50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75CE18BF-D594-42E4-A8C3-BD51FA2CD46B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75CE18BF-D594-42E4-A8C3-BD51FA2CD46B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75CE18BF-D594-42E4-A8C3-BD51FA2CD46B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75CE18BF-D594-42E4-A8C3-BD51FA2CD46B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{680D153B-8F9D-44F0-8CA9-C852D5D4BBE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{680D153B-8F9D-44F0-8CA9-C852D5D4BBE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{680D153B-8F9D-44F0-8CA9-C852D5D4BBE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{680D153B-8F9D-44F0-8CA9-C852D5D4BBE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08B0203C-0EDE-4277-8795-85CBB57BE5C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08B0203C-0EDE-4277-8795-85CBB57BE5C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08B0203C-0EDE-4277-8795-85CBB57BE5C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08B0203C-0EDE-4277-8795-85CBB57BE5C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{320198D3-67EB-425C-88D4-36D736F124DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{320198D3-67EB-425C-88D4-36D736F124DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{320198D3-67EB-425C-88D4-36D736F124DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{320198D3-67EB-425C-88D4-36D736F124DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
